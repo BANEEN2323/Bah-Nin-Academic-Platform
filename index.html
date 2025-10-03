@@ -36,6 +36,7 @@
       border-bottom: 2px solid #00ffff;
       font-weight: 700;
       flex-wrap: wrap;
+      transition: top 0.4s ease; /* حركة انزلاق عند الإخفاء */
     }
 
     .logo-container {
@@ -253,40 +254,33 @@
     </div>
   </footer>
 
-  <!-- سكربت العداد -->
+  <!-- سكربت -->
   <script>
-    function generateDeviceId() {
-      return 'dev-' + Math.random().toString(36).substr(2, 9);
-    }
+    // إخفاء الشريط العلوي عند النزول
+    let lastScrollTop = 0;
+    const topbar = document.getElementById("topbar");
 
-    function updateVisitors() {
-      let deviceId = localStorage.getItem("deviceId");
-      if (!deviceId) {
-        // أول مرة لهذا الجهاز
-        deviceId = generateDeviceId();
-        localStorage.setItem("deviceId", deviceId);
-
-        // إجمالي الزوار
-        let total = parseInt(localStorage.getItem("totalVisits")) || 0;
-        total++;
-        localStorage.setItem("totalVisits", total);
-
-        // زوار اليوم
-        let today = new Date().toLocaleDateString();
-        let lastDate = localStorage.getItem("lastVisitDate");
-        let todayCount = parseInt(localStorage.getItem("todayVisits")) || 0;
-
-        if (lastDate !== today) {
-          todayCount = 0;
-        }
-        todayCount++;
-        localStorage.setItem("todayVisits", todayCount);
-        localStorage.setItem("lastVisitDate", today);
+    window.addEventListener("scroll", function() {
+      let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      if (currentScroll > lastScrollTop) {
+        topbar.style.top = "-80px"; // إخفاء
+      } else {
+        topbar.style.top = "0"; // إظهار
       }
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    });
 
-      // تحديث الأرقام
-      document.getElementById("totalVisits").textContent = localStorage.getItem("totalVisits") || 0;
-      document.getElementById("todayVisits").textContent = localStorage.getItem("todayVisits") || 0;
+    // عداد الزوار باستخدام CountAPI
+    async function updateVisitors() {
+      // إجمالي الزوار
+      let totalRes = await fetch("https://api.countapi.xyz/hit/bhnin-academy/total");
+      let totalData = await totalRes.json();
+      document.getElementById("totalVisits").textContent = totalData.value;
+
+      // زوار اليوم (نستخدم key مختلفة)
+      let todayRes = await fetch("https://api.countapi.xyz/hit/bhnin-academy/today");
+      let todayData = await todayRes.json();
+      document.getElementById("todayVisits").textContent = todayData.value;
     }
 
     updateVisitors();
