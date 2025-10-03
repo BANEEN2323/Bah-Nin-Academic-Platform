@@ -6,7 +6,6 @@
   <title>منصة 🦋 به نين 🦋 الأكاديمية</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* ------------------- تصميم الجسم والخلفية ------------------- */
     body {
       margin: 0;
       padding: 0;
@@ -19,43 +18,6 @@
       line-height: 1.6;
       display: flex;
       flex-direction: column;
-    }
-
-    body::before, body::after {
-      content: '';
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: inherit;
-      background-size: cover;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    body::before {
-      animation: waveLayer1 12s ease-in-out infinite alternate, shineLayer 6s linear infinite;
-      filter: brightness(0.85);
-    }
-    body::after {
-      animation: waveLayer2 20s ease-in-out infinite alternate, shineLayer 8s linear infinite;
-      filter: brightness(0.9);
-    }
-
-    @keyframes waveLayer1 { 
-      0% { transform: translateX(0) translateY(0) scale(1); } 
-      50% { transform: translateX(8px) translateY(5px) scale(1.03); } 
-      100% { transform: translateX(0) translateY(0) scale(1); } 
-    }
-    @keyframes waveLayer2 { 
-      0% { transform: translateX(0) translateY(0) scale(1); } 
-      50% { transform: translateX(-10px) translateY(-7px) scale(1.05); } 
-      100% { transform: translateX(0) translateY(0) scale(1); } 
-    }
-    @keyframes shineLayer { 
-      0% { filter: brightness(0.85); } 
-      50% { filter: brightness(1.25); } 
-      100% { filter: brightness(0.85); } 
     }
 
     /* ------------------- الشريط العلوي ------------------- */
@@ -73,20 +35,19 @@
       box-shadow: 0 6px 18px rgba(0,0,0,0.5);
       border-bottom: 2px solid #00ffff;
       font-weight: 700;
-      transition: top 0.3s, background 0.3s;
       flex-wrap: wrap;
     }
 
     .logo-container {
       display: flex;
       align-items: center;
-      gap: 10px; /* المسافة بين الفراغ والنص */
+      gap: 10px;
+      flex: 1;
     }
 
     .logo-placeholder {
       width: 50px;
       height: 50px;
-      /* يمكن تركه شفافًا أو بلون الخلفية */
       background: rgba(0,0,0,0);
       flex-shrink: 0;
     }
@@ -224,15 +185,16 @@
     @media (max-width: 768px) {
       .topbar {
         flex-direction: column;
-        align-items: flex-start;
-        padding: 10px 15px;
+        align-items: stretch;
+        text-align: center;
+        padding: 10px;
       }
       .logo-container {
+        justify-content: center;
         margin-bottom: 8px;
-        transform: none; /* إزالة التحريك على الشاشات المتوسطة */
       }
       .contact-btn {
-        align-self: stretch;
+        width: 100%;
         text-align: center;
       }
     }
@@ -291,41 +253,42 @@
     </div>
   </footer>
 
-  <!-- السكربت -->
+  <!-- سكربت العداد -->
   <script>
-    // اخفاء الشريط العلوي عند النزول
-    let lastScroll = 0;
-    const topbar = document.getElementById('topbar');
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-      if (currentScroll > lastScroll) {
-        topbar.style.top = '-70px';
-      } else {
-        topbar.style.top = '0';
-      }
-      lastScroll = currentScroll <= 0 ? 0 : currentScroll;
-    });
-
-    // عداد الزوار
-    function updateVisitors() {
-      let total = localStorage.getItem("totalVisits") || 0;
-      total++;
-      localStorage.setItem("totalVisits", total);
-
-      let today = new Date().toLocaleDateString();
-      let lastDate = localStorage.getItem("lastVisitDate");
-      let todayCount = localStorage.getItem("todayVisits") || 0;
-
-      if (lastDate !== today) {
-        todayCount = 0;
-      }
-      todayCount++;
-      localStorage.setItem("todayVisits", todayCount);
-      localStorage.setItem("lastVisitDate", today);
-
-      document.getElementById("totalVisits").textContent = total;
-      document.getElementById("todayVisits").textContent = todayCount;
+    function generateDeviceId() {
+      return 'dev-' + Math.random().toString(36).substr(2, 9);
     }
+
+    function updateVisitors() {
+      let deviceId = localStorage.getItem("deviceId");
+      if (!deviceId) {
+        // أول مرة لهذا الجهاز
+        deviceId = generateDeviceId();
+        localStorage.setItem("deviceId", deviceId);
+
+        // إجمالي الزوار
+        let total = parseInt(localStorage.getItem("totalVisits")) || 0;
+        total++;
+        localStorage.setItem("totalVisits", total);
+
+        // زوار اليوم
+        let today = new Date().toLocaleDateString();
+        let lastDate = localStorage.getItem("lastVisitDate");
+        let todayCount = parseInt(localStorage.getItem("todayVisits")) || 0;
+
+        if (lastDate !== today) {
+          todayCount = 0;
+        }
+        todayCount++;
+        localStorage.setItem("todayVisits", todayCount);
+        localStorage.setItem("lastVisitDate", today);
+      }
+
+      // تحديث الأرقام
+      document.getElementById("totalVisits").textContent = localStorage.getItem("totalVisits") || 0;
+      document.getElementById("todayVisits").textContent = localStorage.getItem("todayVisits") || 0;
+    }
+
     updateVisitors();
   </script>
 </body>
