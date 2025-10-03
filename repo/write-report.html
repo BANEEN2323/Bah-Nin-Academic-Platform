@@ -18,6 +18,7 @@
       background: linear-gradient(270deg, #af76ed, #6e9ef1, #ea69dd, #f5ab95);
       background-size: 800% 800%;
       animation: gradientBG 30s ease infinite;
+      overflow-x: hidden; /* يمنع التحريك يمين ويسار */
     }
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
@@ -28,10 +29,10 @@
     }
 
     header {
-      background: rgba(0, 0, 0, 0.65);
+      background: rgba(0, 0, 0, 0.7);
       color: #fff;
       padding: 18px 0;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: bold;
       position: fixed;
       top: 0;
@@ -39,6 +40,8 @@
       z-index: 1000;
       box-shadow: 0 4px 30px rgba(0,0,0,0.5);
       backdrop-filter: blur(8px);
+      transition: top 0.4s ease;
+      text-align: center;
     }
     header a { color: #05f8f0; text-decoration: none; transition: 0.3s; }
     header a:hover { color: #f6dc4d; transform: scale(1.2); }
@@ -108,13 +111,19 @@
       color: white;
       padding: 25px 20px;
       font-size: 15px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      text-align: center;
       width: 100%;
     }
-    .footer-top { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
-    .counter { text-align: left; }
+    .footer-top {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .counter { font-weight: bold; }
+
     .alert-box {
       background: rgba(255, 82, 82, 0.9);
       color: #fff;
@@ -123,6 +132,8 @@
       font-size: 15px;
       margin-top: 12px;
       max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .alert-box a { color: #ffd700; font-weight: bold; text-decoration: none; }
     .alert-box a:hover { text-decoration: underline; }
@@ -196,9 +207,21 @@
   document.getElementById("total-visits").textContent = totalVisits;
   document.getElementById("daily-visits").textContent = dailyVisits;
 
-  // تحويل أول بطاقتين إلى التلي عند الضغط
+  // تحويل البطاقات إلى التلي عند الضغط
   document.getElementById("card1").addEventListener("click", () => { window.location.href = "https://t.me/bn00na"; });
   document.getElementById("card2").addEventListener("click", () => { window.location.href = "https://t.me/bn00na"; });
+
+  // إخفاء/إظهار الهيدر عند السكرول
+  let prevScrollpos = window.pageYOffset;
+  window.onscroll = function() {
+    let currentScrollPos = window.pageYOffset;
+    if (prevScrollpos < currentScrollPos) {
+      document.querySelector("header").style.top = "-80px"; // يختفي
+    } else {
+      document.querySelector("header").style.top = "0"; // يظهر
+    }
+    prevScrollpos = currentScrollPos;
+  }
 </script>
 
 </body>
