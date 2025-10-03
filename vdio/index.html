@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>منصة 🦋 به نين 🦋 الأكاديمية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ------------------- تصميم الجسم والخلفية ------------------- */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      min-height: 100vh;
+      color: white;
+      overflow-y: auto;
+      background: url("88.jpg") no-repeat center 10px fixed;
+      background-size: cover;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      background-size: cover;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    body::before {
+      animation: waveLayer1 12s ease-in-out infinite alternate, shineLayer 6s linear infinite;
+      filter: brightness(0.85);
+    }
+    body::after {
+      animation: waveLayer2 20s ease-in-out infinite alternate, shineLayer 8s linear infinite;
+      filter: brightness(0.9);
+    }
+
+    @keyframes waveLayer1 { 
+      0% { transform: translateX(0) translateY(0) scale(1); } 
+      50% { transform: translateX(8px) translateY(5px) scale(1.03); } 
+      100% { transform: translateX(0) translateY(0) scale(1); } 
+    }
+    @keyframes waveLayer2 { 
+      0% { transform: translateX(0) translateY(0) scale(1); } 
+      50% { transform: translateX(-10px) translateY(-7px) scale(1.05); } 
+      100% { transform: translateX(0) translateY(0) scale(1); } 
+    }
+    @keyframes shineLayer { 
+      0% { filter: brightness(0.85); } 
+      50% { filter: brightness(1.25); } 
+      100% { filter: brightness(0.85); } 
+    }
+
+    /* ------------------- الشريط العلوي ------------------- */
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.75);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+      border-bottom: 2px solid #00ffff;
+      font-weight: 700;
+      transition: top 0.3s, background 0.3s;
+      flex-wrap: wrap;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px; /* المسافة بين الفراغ والنص */
+    }
+
+    .logo-placeholder {
+      width: 50px;
+      height: 50px;
+      /* يمكن تركه شفافًا أو بلون الخلفية */
+      background: rgba(0,0,0,0);
+      flex-shrink: 0;
+    }
+
+    .site-name {
+      font-size: clamp(16px, 1.8vw, 24px);
+      color: #00ffff;
+      font-weight: 800;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+      white-space: nowrap;
+    }
+
+    .contact-btn {
+      color: #00ffff;
+      font-size: clamp(14px, 1.5vw, 20px);
+      text-decoration: none;
+      padding: 8px 15px;
+      border: 2px solid #00ffff;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      background: rgba(0,0,0,0.3);
+      white-space: nowrap;
+    }
+
+    .contact-btn:hover {
+      background: #00ffff;
+      color: #000;
+      box-shadow: 0 4px 12px rgba(0,255,255,0.5);
+      transform: translateY(-2px);
+    }
+
+    /* ------------------- محتوى الصفحة ------------------- */
+    .wrapper {
+      text-align: center;
+      width: 90%;
+      max-width: 700px;
+      padding: 140px 15px 40px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      flex: 1;
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 46px);
+      margin: 0 0 40px;
+      background: linear-gradient(90deg, #ffffff, #f502f5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 12px rgba(0,255,255,0.12);
+      font-weight:700;
+      line-height: 1.2;
+    }
+
+    .container { 
+      display: flex; 
+      flex-direction: column; 
+      gap: clamp(15px, 3vw, 25px); 
+    }
+
+    .service-box {
+      position: relative;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 20px;
+      padding: clamp(20px, 4vw, 35px) 20px;
+      color: #fff;
+      font-size: clamp(16px, 2.5vw, 20px);
+      font-weight: bold;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid #00ff00;
+      line-height: 1.6;
+      transition: all 0.5s ease;
+    }
+
+    .service-box:hover { 
+      transform: scale(1.05); 
+      background: rgba(100, 0, 100, 0.6); 
+      box-shadow: 0 25px 60px rgba(128, 0, 128, 0.7); 
+      color: #00ff00; 
+    }
+
+    .icon { 
+      font-size: clamp(30px, 5vw, 40px); 
+      margin-bottom: 15px; 
+      transition: transform 0.8s ease, color 0.8s ease; 
+      color: #00ffff; 
+    }
+    .service-box:hover .icon { 
+      transform: scale(1.25) translateY(-8px);
+      color: #ff00ff; 
+    }
+
+    /* ------------------- الفوتر ------------------- */
+    footer {
+      background: rgba(0,0,0,0.7);
+      padding: 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .visitors-box {
+      background: rgba(0,0,0,0.6);
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 15px;
+      margin-bottom: 15px;
+      display: inline-block;
+    }
+
+    .alert-box {
+      background: rgba(255, 0, 0, 0.75);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: bold;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+      display: inline-block;
+    }
+
+    .alert-box a {
+      color: #00ffff;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    /* ------------------- Media Queries ------------------- */
+    @media (max-width: 768px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 15px;
+      }
+      .logo-container {
+        margin-bottom: 8px;
+        transform: none; /* إزالة التحريك على الشاشات المتوسطة */
+      }
+      .contact-btn {
+        align-self: stretch;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 26px; }
+      .service-box { font-size: 16px; }
+      .visitors-box, .alert-box { font-size: 14px; }
+      .logo-placeholder { width: 40px; height: 40px; }
+      .site-name { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- الشريط العلوي -->
+  <div class="topbar" id="topbar">
+    <div class="logo-container">
+      <div class="logo-placeholder"></div>
+      <span class="site-name">منصة 🦋 به نين 🦋 الأكاديمية</span>
+    </div>
+    <a href="https://t.me/bn00na" target="_blank" class="contact-btn">📞 تواصل معنا</a>
+  </div>
+
+  <!-- محتوى الصفحة -->
+  <div class="wrapper">
+    <h1>أدوات المساعدة الأكاديمية</h1>
+    <div class="container">
+      <a class="service-box" href="repo/write-report.html" target="_blank">
+        <div class="icon">📝</div>
+        مساعد إعداد التقارير
+      </a>
+      <a class="service-box" href="power/powerpoint.html" target="_blank">
+        <div class="icon">📊</div>
+        دعم العروض التقديمية
+      </a>
+      <a class="service-box" href="res/research.html" target="_blank">
+        <div class="icon">🔎</div>
+        إرشادات بحوث التخرج 
+      </a>
+      <a class="service-box" href="vdio/summary-video.html" target="_blank">
+        <div class="icon">🎥</div>
+        تلخيص الملف وتحويله الى فيديو
+      </a>
+    </div>
+  </div>
+
+  <!-- الفوتر -->
+  <footer>
+    <div class="visitors-box">
+      👥 إجمالي الزوار: <span id="totalVisits">0</span> |
+      📅 زوار اليوم: <span id="todayVisits">0</span>
+    </div>
+    <br>
+    <div class="alert-box">
+      ⚠️ في حال حدوث أي خطأ أو مشكلة يرجى <a href="https://t.me/bn00na" target="_blank">التواصل معنا</a> ليتم إعادة الترتيب حسب طلبك.
+    </div>
+  </footer>
+
+  <!-- السكربت -->
+  <script>
+    // اخفاء الشريط العلوي عند النزول
+    let lastScroll = 0;
+    const topbar = document.getElementById('topbar');
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      if (currentScroll > lastScroll) {
+        topbar.style.top = '-70px';
+      } else {
+        topbar.style.top = '0';
+      }
+      lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+    });
+
+    // عداد الزوار
+    function updateVisitors() {
+      let total = localStorage.getItem("totalVisits") || 0;
+      total++;
+      localStorage.setItem("totalVisits", total);
+
+      let today = new Date().toLocaleDateString();
+      let lastDate = localStorage.getItem("lastVisitDate");
+      let todayCount = localStorage.getItem("todayVisits") || 0;
+
+      if (lastDate !== today) {
+        todayCount = 0;
+      }
+      todayCount++;
+      localStorage.setItem("todayVisits", todayCount);
+      localStorage.setItem("lastVisitDate", today);
+
+      document.getElementById("totalVisits").textContent = total;
+      document.getElementById("todayVisits").textContent = todayCount;
+    }
+    updateVisitors();
+  </script>
+</body>
+</html>
