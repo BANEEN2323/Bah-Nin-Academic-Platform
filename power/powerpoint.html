@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>منصة 🦋 به نين 🦋 الأكاديمية </title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      background: linear-gradient(270deg, #af76ed, #6e9ef1, #ea69dd, #f5ab95);
+      background-size: 800% 800%;
+      animation: gradientBG 30s ease infinite;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 50% 100%; }
+      50% { background-position: 100% 50%; }
+      75% { background-position: 50% 0%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.65);
+      color: #fff;
+      padding: 10px 0 18px;
+      font-size: 24px;
+      font-weight: bold;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    header a { color: #05f8f0; text-decoration: none; transition: 0.3s; }
+    header a:hover { color: #f6dc4d; transform: scale(1.2); }
+
+    .dev-alert {
+      background: #ff4e4e;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      animation: flash 2s infinite;
+    }
+    @keyframes flash {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    h1 {
+      margin: 180px 20px 50px;
+      color: #f4d823;
+      font-size: 42px;
+      font-weight: 700;
+      text-shadow: 0 5px 20px rgba(0,0,0,0.6);
+      animation: fadeDown 1.2s ease;
+    }
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
+
+    .services {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding-bottom: 50px;
+      max-width: 1100px;
+      margin: 0 20px;
+    }
+    .card {
+      background: linear-gradient(145deg, #ffffff, #cdefff);
+      border-radius: 30px;
+      padding: 35px 25px;
+      width: 320px;
+      color: #111;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+      transition: transform 0.5s, box-shadow 0.5s, background 0.5s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .card:hover { 
+      transform: translateY(-15px) scale(1.05); 
+      box-shadow: 0 25px 60px rgba(0,0,0,0.35); 
+      background: linear-gradient(145deg, #ffd7a8, #ff7c7c); 
+    }
+    .card h2 { font-size: 26px; margin-bottom: 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .card h2 span { 
+      font-size: 65px; 
+      display: inline-block; 
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4)); 
+      animation: float 2s infinite ease-in-out;
+    }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .card p { font-size: 16px; margin-bottom: 12px; line-height: 1.5; }
+    .price { font-size: 22px; font-weight: bold; color: #e91e63; margin-top: 10px; }
+
+    footer {
+      background: rgba(0,0,0,0.85);
+      color: white;
+      padding: 25px 20px;
+      font-size: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .footer-top { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+    .counter { text-align: left; }
+    .alert-box {
+      background: rgba(255, 82, 82, 0.9);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 14px;
+      font-size: 15px;
+      margin-top: 12px;
+      max-width: 700px;
+    }
+    .alert-box a { color: #ffd700; font-weight: bold; text-decoration: none; }
+    .alert-box a:hover { text-decoration: underline; }
+
+    @media (max-width: 992px) { .card { width: 80%; } h1{font-size:34px;} }
+    @media (max-width: 768px) { h1 { font-size: 28px; margin:140px 10px 30px;} .card h2 span{font-size:55px;} }
+    @media (max-width: 480px) { .card{width:95%;padding:25px 15px;} .card h2{font-size:20px;} .card h2 span{font-size:45px;} .price{font-size:18px;} }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="dev-alert">
+    ⚠️ الصفحة قيد التطوير، سيتم قريبًا إضافة قوالب والاختيار حسب الطلب.
+  </div>
+  <a href="https://t.me/bn00na" target="_blank">📞 تواصل معنا</a>
+</header>
+
+<h1>اختر نوع البوربوينت المناسب لك</h1>
+
+<div class="services">
+  <div class="card" id="card1">
+    <h2><span>📊</span> بوربوينت عادي</h2>
+    <p>تصميم أنيق ومرتب يناسب جميع الأغراض الأكاديمية.</p>
+    <p class="price">السعر: 5.000 د.ع</p>
+  </div>
+  <div class="card" id="card2">
+    <h2><span>🌟</span> بوربوينت VIP</h2>
+    <p>تصميم احترافي بلمسات عصرية ومؤثرات مميزة.</p>
+    <p class="price">السعر: 8.000 د.ع </p>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div>جميع الحقوق محفوظة © 2025</div>
+    <div class="counter">
+      إجمالي الزوار: <span id="total-visits">0</span> | 
+      زوار اليوم: <span id="daily-visits">0</span>
+    </div>
+  </div>
+  <div class="alert-box">
+    ⚠️ عند حدوث أي خطأ أو مشاكل يرجى 
+    <a href="https://t.me/bn00na" target="_blank">تواصل معنا</a>
+  </div>
+</footer>
+
+<script>
+  // عداد الزوار
+  let totalVisits = localStorage.getItem("totalVisits") || 0;
+  let today = new Date().toLocaleDateString();
+  let lastVisitDate = localStorage.getItem("lastVisitDate");
+  let dailyVisits = localStorage.getItem("dailyVisits") || 0;
+
+  if (lastVisitDate !== today) {
+    dailyVisits = 0;
+    localStorage.setItem("lastVisitDate", today);
+  }
+  totalVisits++;
+  dailyVisits++;
+  localStorage.setItem("totalVisits", totalVisits);
+  localStorage.setItem("dailyVisits", dailyVisits);
+  document.getElementById("total-visits").textContent = totalVisits;
+  document.getElementById("daily-visits").textContent = dailyVisits;
+
+  // تحويل البطاقتين إلى التلي عند الضغط
+  document.getElementById("card1").addEventListener("click", () => {
+    window.location.href = "https://t.me/bn00na";
+  });
+  document.getElementById("card2").addEventListener("click", () => {
+    window.location.href = "https://t.me/bn00na";
+  });
+</script>
+
+</body>
+</html>
