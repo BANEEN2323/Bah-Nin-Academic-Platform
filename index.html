@@ -154,15 +154,23 @@
       padding: 20px;
       text-align: center;
       margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
     }
 
     .visitors-box {
       background: rgba(0,0,0,0.6);
-      padding: 10px 15px;
-      border-radius: 10px;
-      font-size: 15px;
-      margin-bottom: 15px;
-      display: inline-block;
+      padding: 15px 25px;
+      border-radius: 20px;
+      font-size: clamp(14px, 2vw, 18px);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
     }
 
     .alert-box {
@@ -248,7 +256,6 @@
       👥 إجمالي الزوار: <span id="totalVisits">0</span> |
       📅 زوار اليوم: <span id="todayVisits">0</span>
     </div>
-    <br>
     <div class="alert-box">
       ⚠️ في حال حدوث أي خطأ أو مشكلة يرجى <a href="https://t.me/bn00na" target="_blank">التواصل معنا</a> ليتم إعادة الترتيب حسب طلبك.
     </div>
@@ -270,20 +277,23 @@
       lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     });
 
-    // عداد الزوار باستخدام CountAPI
-    async function updateVisitors() {
-      // إجمالي الزوار
-      let totalRes = await fetch("https://api.countapi.xyz/hit/bhnin-academy/total");
-      let totalData = await totalRes.json();
-      document.getElementById("totalVisits").textContent = totalData.value;
+    // عداد الزوار مع تخزين محلي لتجنب العد المتكرر في نفس اليوم
+    let totalVisits = localStorage.getItem("totalVisits") || 0;
+    let today = new Date().toLocaleDateString();
+    let lastVisitDate = localStorage.getItem("lastVisitDate");
+    let dailyVisits = localStorage.getItem("dailyVisits") || 0;
 
-      // زوار اليوم (نستخدم key مختلفة)
-      let todayRes = await fetch("https://api.countapi.xyz/hit/bhnin-academy/today");
-      let todayData = await todayRes.json();
-      document.getElementById("todayVisits").textContent = todayData.value;
+    if (lastVisitDate !== today) {
+      dailyVisits = 0;
+      localStorage.setItem("lastVisitDate", today);
     }
+    totalVisits++;
+    dailyVisits++;
+    localStorage.setItem("totalVisits", totalVisits);
+    localStorage.setItem("dailyVisits", dailyVisits);
 
-    updateVisitors();
+    document.getElementById("totalVisits").textContent = totalVisits;
+    document.getElementById("todayVisits").textContent = dailyVisits;
   </script>
 </body>
 </html>
